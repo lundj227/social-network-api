@@ -1,6 +1,6 @@
-const {Schema, Types} = require('mongoose');
+const {Schema, Types, model} = require('mongoose');
 
-const reaction = new Schema (
+const reactionSchema = new Schema (
     {
         reactionId: {
             type: Schema.Types.ObjectId,
@@ -18,7 +18,18 @@ const reaction = new Schema (
         createdAt:{
             type: Date,
             default: Date.now,
-            // Use a getter method to format the timestamp on query
+            get: (timestamp) => dateFormat(timestamp)
+        }
+    },
+    {
+        toJSON:{
+            getters: true
         }
     }
 );
+
+function dateFormat(timestamp){
+    return timestamp.toLocaleString();
+};
+
+const Reaction = model('reaction', reactionSchema);
