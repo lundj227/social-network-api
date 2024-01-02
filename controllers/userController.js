@@ -6,8 +6,8 @@ module.exports = {
         try {
           const users = await User.find();
           res.json(users);
-        } catch (err) {
-          res.status(500).json(err);
+        } catch (error) {
+          res.status(500).json(error);
         }
       },
     // Get a single user
@@ -21,7 +21,7 @@ module.exports = {
             }
             res.json(user);
         } catch (error){
-            res.status(500).json(err);
+            res.status(500).json(error);
         }
     },
     // Create a new user
@@ -29,8 +29,8 @@ module.exports = {
         try {
           const user = await User.create(req.body);
           res.json(user);
-        } catch (err) {
-          res.status(500).json(err);
+        } catch (error) {
+          res.status(500).json(error);
         }
     },
     async updateUser(req, res) {
@@ -60,8 +60,8 @@ module.exports = {
     
           await Thought.deleteMany({ _id: { $in: user.thoughts } });
           res.json({ message: 'User and associated thoughts deleted!' })
-        } catch (err) {
-          res.status(500).json(err);
+        } catch (error) {
+          res.status(500).json(error);
         };
       },
       // Add a new friend
